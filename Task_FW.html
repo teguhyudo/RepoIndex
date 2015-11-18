@@ -1,0 +1,56 @@
+<!doctype html>
+<html>
+  <head>
+    <title>WebGIS_FWitoelar</title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+    <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
+    <style type="text/css">
+      html, body, #map {
+        margin: 0px;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="L.TileLayer.BetterWMS.js"></script>
+	
+    <script>
+      var map = L.map('map', {
+        center: [-4.77191, 117.31462],
+        zoom: 5
+      });
+      
+      var url = 'http://localhost:8080/geoserver/Indonesia/wms';
+      
+     L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+   
+	 var a = L.tileLayer.wms(url, {
+        layers: ['IndonesiaKab'],
+        transparent: true,
+		opacity: 0.7,
+        format: 'image/png'
+      }).addTo(map);
+	  
+	 var b = L.tileLayer.wms(url, {
+        layers: ['Desa_20km_Balikpapan'],
+        transparent: true,
+		opacity: 1,
+        format: 'image/png'
+      }).addTo(map);
+	  
+	 var c = L.tileLayer.betterWms(url, {
+        layers: ['PoIDesaBpapan'],
+        transparent: true,
+		opacity: 0.5,
+        format: 'image/png'
+      }).addTo(map);
+	  
+
+	  
+    </script>
+  </body>
+</html>
